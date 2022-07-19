@@ -1,10 +1,20 @@
-import {DATA_1} from './inputs'
-import {DATA_2} from './inputs'
+import { debug, info, warning } from '@actions/core';
+import { AltairAPIService } from './synopsys-action/altair-api';
+import {ALTAIR_URL} from './synopsys-action/inputs';
 
 async function run() {
-    console.log("Main is running")
-    console.log("Passed Data 1 is : " + DATA_1);
-    console.log("Passed Data 2 is : " + DATA_2)
+    info("Basic Action running");
+    
+    const altairURL = ALTAIR_URL;
+    debug('Provided Altair URL is - ' + altairURL);
+
+    if(altairURL) {
+        let altairObj = new AltairAPIService(altairURL);
+        altairObj.callAltairFlow();
+    } else {
+        warning('Not supported flow');
+        throw new Error('Not Supported Flow');
+    }
 }
 
 run()

@@ -1,20 +1,6 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 622:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DATA_2 = exports.DATA_1 = void 0;
-const core_1 = __nccwpck_require__(553);
-exports.DATA_1 = (0, core_1.getInput)("data1");
-exports.DATA_2 = (0, core_1.getInput)("data2");
-
-
-/***/ }),
-
 /***/ 255:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -30,13 +16,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const inputs_1 = __nccwpck_require__(622);
-const inputs_2 = __nccwpck_require__(622);
+const core_1 = __nccwpck_require__(181);
+const altair_api_1 = __nccwpck_require__(5);
+const inputs_1 = __nccwpck_require__(510);
 function run() {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("Main is running");
-        console.log("Passed Data 1 is : " + inputs_1.DATA_1);
-        console.log("Passed Data 2 is : " + inputs_2.DATA_2);
+        (0, core_1.info)("Basic Action running");
+        const altairURL = inputs_1.ALTAIR_URL;
+        (0, core_1.debug)('Provided Altair URL is - ' + altairURL);
+        if (altairURL) {
+            let altairObj = new altair_api_1.AltairAPIService(altairURL);
+            altairObj.callAltairFlow();
+        }
+        else {
+            (0, core_1.warning)('Not supported flow');
+            throw new Error('Not Supported Flow');
+        }
     });
 }
 run();
@@ -44,7 +39,42 @@ run();
 
 /***/ }),
 
-/***/ 207:
+/***/ 5:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AltairAPIService = void 0;
+const core_1 = __nccwpck_require__(181);
+class AltairAPIService {
+    constructor(altairURL) {
+        this.altairURL = altairURL;
+    }
+    callAltairFlow() {
+        (0, core_1.info)("Calling Altair flow");
+        return true;
+    }
+}
+exports.AltairAPIService = AltairAPIService;
+
+
+/***/ }),
+
+/***/ 510:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ALTAIR_URL = void 0;
+const core_1 = __nccwpck_require__(181);
+exports.ALTAIR_URL = (0, core_1.getInput)("altair-url");
+
+
+/***/ }),
+
+/***/ 777:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -71,7 +101,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__nccwpck_require__(37));
-const utils_1 = __nccwpck_require__(67);
+const utils_1 = __nccwpck_require__(855);
 /**
  * Commands
  *
@@ -143,7 +173,7 @@ function escapeProperty(s) {
 
 /***/ }),
 
-/***/ 553:
+/***/ 181:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -178,12 +208,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
-const command_1 = __nccwpck_require__(207);
-const file_command_1 = __nccwpck_require__(232);
-const utils_1 = __nccwpck_require__(67);
+const command_1 = __nccwpck_require__(777);
+const file_command_1 = __nccwpck_require__(679);
+const utils_1 = __nccwpck_require__(855);
 const os = __importStar(__nccwpck_require__(37));
 const path = __importStar(__nccwpck_require__(17));
-const oidc_utils_1 = __nccwpck_require__(342);
+const oidc_utils_1 = __nccwpck_require__(266);
 /**
  * The code to exit an action
  */
@@ -461,17 +491,17 @@ exports.getIDToken = getIDToken;
 /**
  * Summary exports
  */
-var summary_1 = __nccwpck_require__(705);
+var summary_1 = __nccwpck_require__(154);
 Object.defineProperty(exports, "summary", ({ enumerable: true, get: function () { return summary_1.summary; } }));
 /**
  * @deprecated use core.summary
  */
-var summary_2 = __nccwpck_require__(705);
+var summary_2 = __nccwpck_require__(154);
 Object.defineProperty(exports, "markdownSummary", ({ enumerable: true, get: function () { return summary_2.markdownSummary; } }));
 /**
  * Path exports
  */
-var path_utils_1 = __nccwpck_require__(493);
+var path_utils_1 = __nccwpck_require__(605);
 Object.defineProperty(exports, "toPosixPath", ({ enumerable: true, get: function () { return path_utils_1.toPosixPath; } }));
 Object.defineProperty(exports, "toWin32Path", ({ enumerable: true, get: function () { return path_utils_1.toWin32Path; } }));
 Object.defineProperty(exports, "toPlatformPath", ({ enumerable: true, get: function () { return path_utils_1.toPlatformPath; } }));
@@ -479,7 +509,7 @@ Object.defineProperty(exports, "toPlatformPath", ({ enumerable: true, get: funct
 
 /***/ }),
 
-/***/ 232:
+/***/ 679:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -510,7 +540,7 @@ exports.issueCommand = void 0;
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const fs = __importStar(__nccwpck_require__(147));
 const os = __importStar(__nccwpck_require__(37));
-const utils_1 = __nccwpck_require__(67);
+const utils_1 = __nccwpck_require__(855);
 function issueCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -528,7 +558,7 @@ exports.issueCommand = issueCommand;
 
 /***/ }),
 
-/***/ 342:
+/***/ 266:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -544,9 +574,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.OidcClient = void 0;
-const http_client_1 = __nccwpck_require__(127);
-const auth_1 = __nccwpck_require__(578);
-const core_1 = __nccwpck_require__(553);
+const http_client_1 = __nccwpck_require__(754);
+const auth_1 = __nccwpck_require__(475);
+const core_1 = __nccwpck_require__(181);
 class OidcClient {
     static createHttpClient(allowRetry = true, maxRetry = 10) {
         const requestOptions = {
@@ -612,7 +642,7 @@ exports.OidcClient = OidcClient;
 
 /***/ }),
 
-/***/ 493:
+/***/ 605:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -677,7 +707,7 @@ exports.toPlatformPath = toPlatformPath;
 
 /***/ }),
 
-/***/ 705:
+/***/ 154:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -967,7 +997,7 @@ exports.summary = _summary;
 
 /***/ }),
 
-/***/ 67:
+/***/ 855:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1014,7 +1044,7 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 578:
+/***/ 475:
 /***/ (function(__unused_webpack_module, exports) {
 
 "use strict";
@@ -1102,7 +1132,7 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 
 /***/ }),
 
-/***/ 127:
+/***/ 754:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
 "use strict";
@@ -1140,8 +1170,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.HttpClient = exports.isHttps = exports.HttpClientResponse = exports.HttpClientError = exports.getProxyUrl = exports.MediaTypes = exports.Headers = exports.HttpCodes = void 0;
 const http = __importStar(__nccwpck_require__(685));
 const https = __importStar(__nccwpck_require__(687));
-const pm = __importStar(__nccwpck_require__(109));
-const tunnel = __importStar(__nccwpck_require__(233));
+const pm = __importStar(__nccwpck_require__(804));
+const tunnel = __importStar(__nccwpck_require__(586));
 var HttpCodes;
 (function (HttpCodes) {
     HttpCodes[HttpCodes["OK"] = 200] = "OK";
@@ -1714,7 +1744,7 @@ const lowercaseKeys = (obj) => Object.keys(obj).reduce((c, k) => ((c[k.toLowerCa
 
 /***/ }),
 
-/***/ 109:
+/***/ 804:
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
@@ -1782,15 +1812,15 @@ exports.checkBypass = checkBypass;
 
 /***/ }),
 
-/***/ 233:
+/***/ 586:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
-module.exports = __nccwpck_require__(319);
+module.exports = __nccwpck_require__(526);
 
 
 /***/ }),
 
-/***/ 319:
+/***/ 526:
 /***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
 
 "use strict";
