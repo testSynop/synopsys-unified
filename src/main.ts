@@ -13,7 +13,7 @@ async function run() {
         altairObj.callAltairFlow();
     } else {
         warning('Not supported flow');
-        throw new Error('Not Supported Flow');
+        return Promise.reject(new Error('Not Supported Flow'));
     }
 }
 

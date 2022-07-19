@@ -39,5 +39,4 @@ jobs:
         # Use the action defined in this repository
         uses: ./
         with:
-          data1: "First data"
-          data2: "Second data"
+          altair-url: "http://altair-url.com"

@@ -30,7 +30,7 @@ function run() {
         }
         else {
             (0, core_1.warning)('Not supported flow');
-            throw new Error('Not Supported Flow');
+            return Promise.reject(new Error('Not Supported Flow'));
         }
     });
 }
