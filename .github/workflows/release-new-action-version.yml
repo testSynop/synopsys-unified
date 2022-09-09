@@ -1,17 +1,17 @@
 name: Release new action version
 on:
   release:
-    types: [released]
+    types: [releas]
   workflow_dispatch:
-#     inputs:
-#       TAG_NAME:
-#         description: 'Tag name that the major tag will point to'
-#         required: true
+    inputs:
+      TAG_NAME:
+        description: 'Tag name that the major tag will point to'
+        required: true
 
-# env:
-#   TAG_NAME: ${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}
-# permissions:
-#   contents: write
+env:
+  TAG_NAME: ${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }}
+permissions:
+  contents: write
 
 jobs:
   update_tag:
@@ -33,9 +33,9 @@ jobs:
           git config user.email "<>"
       - name: Update the version
         run: |
-          echo ${{ github.ref_name }}
+          echo ${{ env.TAG_NAME }}
           npm ci
-          npm version ${{ github.ref_name }}
+          npm version ${{ env.TAG_NAME }}
           
 #       - name: common code
 #         run: |  
