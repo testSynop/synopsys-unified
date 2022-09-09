@@ -1,7 +1,7 @@
 name: Release new action version
 on:
   release:
-    types: [created]
+    types: [released]
   workflow_dispatch:
 #     inputs:
 #       TAG_NAME:
@@ -32,9 +32,9 @@ jobs:
           npm version ${{ env.GITHUB_REF_NAME }}
           git config --global user.name "kishorikumar"
           git config --global user.email "kishori@sysnopsys.com"
-          git pull
+          git pull origin master
           git commit -a -m "version change"
-          git push -u origin main
+          git push
 #     - name: Update the ${{ env.TAG_NAME }} tag
 #       uses: actions/publish-action@v0.1.0
 #       with:
