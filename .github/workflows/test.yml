@@ -32,9 +32,9 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         env:
-          GITHUB_REF_NAME: ${{ github.ref.name }}
+          GITHUB_REF_NAME: ${{ github.ref_name }}
         run: |
-          echo ${{ env.GITHUB_REF_NAME }}
+          echo ${{ github.ref_name }}
           echo Add other actions to build,
           echo test, and deploy your project.
           
