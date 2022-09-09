@@ -1,7 +1,7 @@
 name: Release new action version
 on:
   release:
-    types: [create]
+    types: [created]
   workflow_dispatch:
 #     inputs:
 #       TAG_NAME:
@@ -30,8 +30,8 @@ jobs:
         run: |
           npm ci
           npm version ${{ env.GITHUB_REF_NAME }}
-          git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
-          git config --global user.email "username@users.noreply.github.com"
+          git config --global user.name "kishorikumar"
+          git config --global user.email "kishori@sysnopsys.com"
           git pull
           git commit -a -m "version change"
           git push -u origin main
