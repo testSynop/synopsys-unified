@@ -32,7 +32,7 @@ jobs:
           npm version ${{ env.GITHUB_REF_NAME }}
           git config --global user.name "kishorikumar"
           git config --global user.email "kishori@sysnopsys.com"
-          git pull origin master
+          git add -A
           git commit -a -m "version change"
           git push
 #     - name: Update the ${{ env.TAG_NAME }} tag
