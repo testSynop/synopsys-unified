@@ -28,9 +28,9 @@ jobs:
           node-version: 12.x
       - name: Update the version
         run: |
-          echo ${{ github.ref.name }}
+          echo ${{ github.ref_name }}
           npm ci
-          npm version ${{ github.ref.name }}
+          npm version ${{ github.ref_name }}
           
 #       - name: common code
 #         run: |  
