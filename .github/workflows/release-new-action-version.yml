@@ -34,7 +34,7 @@ jobs:
           git config --global user.email "kishori@sysnopsys.com"
           git add -A
           git commit -a -m "version change"
-          git push
+          git push origin HEAD:master
 #     - name: Update the ${{ env.TAG_NAME }} tag
 #       uses: actions/publish-action@v0.1.0
 #       with:
