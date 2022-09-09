@@ -28,13 +28,17 @@ jobs:
           node-version: 12.x
       - name: Update the version
         run: |
+          echo ${{ env.GITHUB_REF_NAME }}
           npm ci
           npm version ${{ env.GITHUB_REF_NAME }}
-          git config --global user.name "kishorikumar"
-          git config --global user.email "kishori@sysnopsys.com"
-          git add -A
-          git commit -a -m "version change"
-          git push origin HEAD:master
+          
+#       - name: common code
+#         run: |  
+#           git config --global user.name "kishorikumar"
+#           git config --global user.email "kishori@sysnopsys.com"
+#           git add -A
+#           git commit -a -m "version change"
+#           git push origin HEAD:master
 #     - name: Update the ${{ env.TAG_NAME }} tag
 #       uses: actions/publish-action@v0.1.0
 #       with:
