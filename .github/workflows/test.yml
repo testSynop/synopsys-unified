@@ -34,7 +34,7 @@ jobs:
         env:
           GITHUB_REF_NAME: ${{ github.ref.name }}
         run: |
-          echo ${{ GITHUB_REF_NAME }}
+          echo ${{ env.GITHUB_REF_NAME }}
           echo Add other actions to build,
           echo test, and deploy your project.
           
