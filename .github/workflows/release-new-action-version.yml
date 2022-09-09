@@ -26,6 +26,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 12.x
+      - name: setup git config
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"
       - name: Update the version
         run: |
           echo ${{ github.ref_name }}
