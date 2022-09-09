@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       TAG_NAME:
-        description: 'Tag name'
+        description: 'Bump Version'
         required: true
 
 env:
@@ -36,7 +36,9 @@ jobs:
           echo ${{ env.TAG_NAME }}
           npm ci
           npm version ${{ env.TAG_NAME }}
-          
+      - uses: actions/upload-artifact@v3
+        with:
+          path: dist/*.js*
 #       - name: common code
 #         run: |  
 #           git config --global user.name "kishorikumar"
