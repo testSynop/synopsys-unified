@@ -1,0 +1,168 @@
+{
+  "data": {
+    "polaris": {
+      "accesstoken": "4ivieiora145bdndo3vs84g7pgiba4sbj5m4k2lkmuunvjh6e5rdslr9m1i8jtao9nih3i1kmnfu6",
+      "application": {
+        "name": "central-scm-sast-sca"
+      },
+      "assessment": {
+        "types": [
+          "SAST"
+        ]
+      },
+      "project": {
+        "name": "central-scm-project"
+      },
+      "serverurl": "https://pim.altair.synopsys.com"
+    }
+  },
+  "adapters": [
+    {
+      "name": "Polaris Initializer",
+      "type": "json",
+      "stage": "polaris",
+      "status": "failed",
+      "config": {
+        "require": [
+          "polaris.serverUrl",
+          "polaris.accessToken",
+          "polaris.application.name",
+          "polaris.project.name",
+          "polaris.assessment.types"
+        ],
+        "produce": [
+          "polaris.test.sast.id",
+          "polaris.test.sast.streamId",
+          "polaris.test.sca.id",
+          "polaris.project.id"
+        ],
+        "command": [
+          "polaris-initializer"
+        ]
+      }
+    },
+    {
+      "name": "Polaris Controller",
+      "type": "json",
+      "stage": "polaris",
+      "status": "done",
+      "config": {
+        "command": [
+          "polaris-controller"
+        ],
+        "require": [
+          "polaris.serverUrl",
+          "polaris.accessToken"
+        ],
+        "optional": [
+          "polaris.test.sast.id",
+          "polaris.test.sca.id",
+          "coverity.install.directory",
+          "blackduck.install.directory"
+        ],
+        "produce": [
+          "coverity.id",
+          "coverity.execution.path",
+          "blackduck.id",
+          "blackduck.execution.path",
+          "coverity.install.default.directory",
+          "blackduck.install.default.directory",
+          "downloads.coverity.url",
+          "downloads.blackduck.url",
+          "polaris.artifacts.coverity.path",
+          "polaris.artifacts.blackduck.path"
+        ]
+      }
+    },
+    {
+      "name": "Polaris Artifacts Uploader",
+      "type": "json",
+      "stage": "polaris",
+      "status": "done",
+      "config": {
+        "command": [
+          "polaris-artifacts-uploader"
+        ],
+        "require": [
+          "polaris.serverUrl",
+          "polaris.accessToken"
+        ],
+        "optional": [
+          "polaris.test.sast.id",
+          "polaris.test.sca.id",
+          "polaris.artifacts.coverity.path",
+          "polaris.artifacts.blackduck.path",
+          "coverity.id",
+          "blackduck.id",
+          "coverity.scanSuccessful",
+          "blackduck.scanSuccessful"
+        ],
+        "produce": [
+          "polaris.artifacts.coverity.uploadSuccessful",
+          "polaris.artifacts.blackduck.uploadSuccessful"
+        ]
+      }
+    },
+    {
+      "name": "Polaris Waiter",
+      "type": "json",
+      "stage": "polaris",
+      "status": "done",
+      "config": {
+        "command": [
+          "polaris-waiter"
+        ],
+        "require": [
+          "polaris.serverUrl",
+          "polaris.accessToken"
+        ],
+        "optional": [
+          "polaris.test.sast.id",
+          "polaris.test.sca.id",
+          "polaris.test.sast.pollTime",
+          "polaris.test.sca.pollTime",
+          "polaris.artifacts.coverity.uploadSuccessful",
+          "polaris.artifacts.blackduck.uploadSuccessful"
+        ],
+        "produce": [
+          "polaris.test.sast.completed",
+          "polaris.test.sca.completed"
+        ]
+      }
+    },
+    {
+      "name": "Polaris Issues Fetcher",
+      "type": "json",
+      "stage": "polaris",
+      "status": "failed",
+      "config": {
+        "command": [
+          "polaris-issues-fetcher"
+        ],
+        "require": [
+          "polaris.serverUrl",
+          "polaris.accessToken",
+          "polaris.project.id"
+        ],
+        "optional": [
+          "polaris.test.sast.id",
+          "polaris.test.sca.id",
+          "polaris.test.sast.completed",
+          "polaris.test.sca.completed"
+        ],
+        "produce": [
+          "polaris.test.sast.issues.minimal",
+          "polaris.test.sast.issues.critical",
+          "polaris.test.sast.issues.low",
+          "polaris.test.sast.issues.medium",
+          "polaris.test.sast.issues.high",
+          "polaris.test.sca.issues.minimal",
+          "polaris.test.sca.issues.critical",
+          "polaris.test.sca.issues.low",
+          "polaris.test.sca.issues.medium",
+          "polaris.test.sca.issues.high"
+        ]
+      }
+    }
+  ]
+}
