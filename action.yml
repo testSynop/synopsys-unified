@@ -2,7 +2,7 @@ name: 'Synopsys Unified'
 branding:
   icon: 'shield'
   color: 'purple'
-description: 'Find and fix software weaknesses and vulnerabilities during development, before you ship or deploy!'
+description: 'Synopsys Find and fix software weaknesses and vulnerabilities during development, before you ship or deploy!'
 author: 'Synopsys Inc'
 inputs:
   coverity_url:
