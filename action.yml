@@ -1,9 +1,9 @@
 name: 'Synopsys Unified'
+description: 'Find and fix software weaknesses and vulnerabilities during development, before you ship or deploy!'
+author: 'Synopsys Inc'
 branding:
   icon: 'shield'
   color: 'purple'
-description: 'Synopsys Find and fix software weaknesses and vulnerabilities during development, before you ship or deploy!'
-author: 'Synopsys Inc'
 inputs:
   coverity_url:
     description: 'Coverity url'
@@ -71,6 +71,7 @@ inputs:
   bridge_download_version:
     description: 'If provided, Synopsys-action will configure the version of Bridge'
     required: false
+
 runs:
   using: 'node16'
   main: 'dist/index.js'
