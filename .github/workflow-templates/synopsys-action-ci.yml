@@ -1,4 +1,4 @@
-name: Synopsys Action
+name: Synopsys Unified
 
 on:
   push:

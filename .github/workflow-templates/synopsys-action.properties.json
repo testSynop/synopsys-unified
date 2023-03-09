@@ -1,0 +1,12 @@
+{
+  "name": "Synopsys Unified",
+  "description": "Synopsys Unified CI starter workflow.",
+  "categories": [
+    "TypeScript"
+  ],
+  "filePatterns": [
+    "package.json$",
+    "^Dockerfile",
+    ".*\\.md$"
+  ]
+}
